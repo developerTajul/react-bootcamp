@@ -22,6 +22,12 @@ class App extends Component{
         }
     }
 
+    resetParent = () => {
+        this.setState({
+            count : 0
+        });
+    }
+
 
     render(){
         const { count } = this.state;
@@ -33,18 +39,22 @@ class App extends Component{
                     <p>Counter - {count}</p>
                     <button onClick={incrementCount}>Increment</button>
                     <button  onClick={decrementCount}>Decrement</button>
-                    <IsOddOrEven count={count} />
+                    <IsOddOrEven count={count} resetParent={this.resetParent} />
                 </div>
         )
     }
 }
 
 class IsOddOrEven extends Component{
+    
+
     render(){
+        const { count, resetParent } = this.props;
         const numberState = this.props.count % 2 === 0 ? 'Even' : 'Odd';
         return(
             <>
-                <p> {this.props.count} is {numberState}</p>
+                <p> {count} is {numberState}</p>
+                <button onClick={resetParent}>Reset</button>
             </>
         )
     }
